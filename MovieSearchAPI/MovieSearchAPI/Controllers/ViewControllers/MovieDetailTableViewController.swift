@@ -107,6 +107,24 @@ class MovieDetailTableViewController: UITableViewController {
 
 
 // MARK: - Search Bar Related
+//(Console Log)
+//h 2021-08-07 07:28:19 +0000
+//receive subscription: (RemoveDuplicates)
+//request unlimited                //new subscription created
+//ha 2021-08-07 07:28:19 +0000
+//har 2021-08-07 07:28:19 +0000
+//harr 2021-08-07 07:28:19 +0000
+//harry 2021-08-07 07:28:19 +0000  //debounce
+//receive value: (harry)
+//https://api.themoviedb.org/3/search/movie?api_key=****11d1ad54efd1c1ab382103435cee&query=harry
+//harr 2021-08-07 07:28:45 +0000
+//harry 2021-08-07 07:28:45 +0000  //remove duplicates
+//harr 2021-08-07 07:28:53 +0000
+//har 2021-08-07 07:28:53 +0000
+//ha 2021-08-07 07:28:53 +0000
+//h 2021-08-07 07:28:53 +0000
+//receive cancel                   //subscription canceled
+
 extension MovieDetailTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchKey = searchController.searchBar.text,
@@ -116,7 +134,7 @@ extension MovieDetailTableViewController: UISearchResultsUpdating {
             return
         }
         
-        print(searchKey)
+        //print(searchKey, Date().description)
         
         setupCombine()
         searchKeyPublisher.send(searchKey)
@@ -137,6 +155,7 @@ extension MovieDetailTableViewController {
         let filteredPublisher = searchKeyPublisher
             .debounce(for: .seconds(debounceInSeconds), scheduler: DispatchQueue.global())
             .removeDuplicates()
+            //.print()
             .share()
         
         filteredPublisher
