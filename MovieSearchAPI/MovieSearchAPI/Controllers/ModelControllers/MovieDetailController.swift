@@ -19,6 +19,7 @@ enum MovieDetailError: LocalizedError {
 struct MovieDetailController {
     static let baseURL = URL(string: "https://api.themoviedb.org/3/search/movie")
     
+    private static let cache = NSCache<NSString,UIImage>()
     
     //https://api.themoviedb.org/3/search/movie?api_key=0b7911d1ad54efd1c1ab382103435cee&query=Jack+Reacher
     static func fetchMovies(_ keyWorld: String, completion: @escaping (Result<[MovieDetail],MovieDetailError>) -> Void) {
@@ -40,7 +41,7 @@ struct MovieDetailController {
             )
         }
         
-        print(finishedURL.absoluteString as Any)
+        print(finishedURL.absoluteString)
         
         URLSession.shared.dataTask(with: finishedURL) { data, response, error in
             
@@ -60,17 +61,19 @@ struct MovieDetailController {
                 return completion(.failure(.unableToDecodeData(error)))
             }
             
-            
-            
+
         }.resume()
         
-        
     }//End Of fetch movie with keyword
-    
     
     //https://image.tmdb.org/t/p/w500
     static func fetchImageFor(_ imageURLString: String, completion: @escaping (Result<UIImage, MovieDetailError>, URLSessionDataTask?) -> Void) {
         var task: URLSessionDataTask?
+        
+        if let image = cache.object(forKey: imageURLString as NSString) {
+            return completion(.success(image), task)
+        }
+        
         
         let imageBaseURL = URL(string: "https://image.tmdb.org/t/p/w500")
         
@@ -100,13 +103,14 @@ struct MovieDetailController {
                 return completion(.failure(.unableToConertToImage),task)
             }
             
+            cache.setObject(image, forKey: imageURLString as NSString)
+            
             completion(.success(image), task)
             
         }
         
         task?.resume()
     }//End Of func
-    
     
 }//End Of MovieDetailController
 

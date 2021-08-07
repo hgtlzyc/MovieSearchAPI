@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9C4500A26BE3CDB00A1FC8C /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4500926BE3CDB00A1FC8C /* StatusTableViewCell.swift */; };
 		E9DC6D2E26BD882600609F12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC6D2D26BD882600609F12 /* AppDelegate.swift */; };
 		E9DC6D3026BD882600609F12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC6D2F26BD882600609F12 /* SceneDelegate.swift */; };
 		E9DC6D3526BD882600609F12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9DC6D3326BD882600609F12 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9C4500926BE3CDB00A1FC8C /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
 		E9DC6D2A26BD882600609F12 /* MovieSearchAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSearchAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DC6D2D26BD882600609F12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9DC6D2F26BD882600609F12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				E9DC6D4D26BD94C300609F12 /* MovieDetailTableViewCell.swift */,
+				E9C4500926BE3CDB00A1FC8C /* StatusTableViewCell.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				E9DC6D4E26BD94C300609F12 /* MovieDetailTableViewCell.swift in Sources */,
 				E9DC6D2E26BD882600609F12 /* AppDelegate.swift in Sources */,
 				E9DC6D4C26BD8D1D00609F12 /* MovieDetailController.swift in Sources */,
+				E9C4500A26BE3CDB00A1FC8C /* StatusTableViewCell.swift in Sources */,
 				E9DC6D5026BD94E600609F12 /* MovieDetailTableViewController.swift in Sources */,
 				E9DC6D3026BD882600609F12 /* SceneDelegate.swift in Sources */,
 				E9DC6D4A26BD8B2C00609F12 /* MovieDetails.swift in Sources */,

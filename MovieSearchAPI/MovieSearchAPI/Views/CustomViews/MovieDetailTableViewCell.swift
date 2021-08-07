@@ -22,11 +22,17 @@ class MovieDetailTableViewCell: UITableViewCell {
     var currentTask: URLSessionDataTask?
     
     func updateViewsWith(_ movieDetail: MovieDetail){
-        movieNameLabel.text = movieDetail.name
         movieRatingLabel.text = String(movieDetail.rating)
         movieSummary.text = movieDetail.summary
         
-        MovieDetailController.fetchImageFor(movieDetail.imageURLComponent) { [weak self] result, task in
+        guard let imageURLString = movieDetail.imageURLComponent else {
+            movieNameLabel.text = movieDetail.name + " (No Poster Available)"
+            return
+        }
+        
+        movieNameLabel.text = movieDetail.name
+        
+        MovieDetailController.fetchImageFor(imageURLString) { [weak self] result, task in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
@@ -45,10 +51,14 @@ class MovieDetailTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        if let task = currentTask {
-            print("canceled", Date())
-            task.cancel()
-        }
+        movieImageView.image = nil
+        movieNameLabel.text = nil
+        movieRatingLabel.text = nil
+        movieSummary.text = nil
+        
+        guard let task = currentTask else { return }
+        task.cancel()
+        
     }
 
 }//End Of Cell

@@ -15,7 +15,7 @@ struct MovieDetail: Codable {
     let name: String
     let rating: Double
     let summary: String
-    let imageURLComponent: String
+    let imageURLComponent: String?
     
     enum CodingKeys: String, CodingKey {
         case name = "original_title"
