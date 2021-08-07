@@ -66,8 +66,6 @@ class MovieDetailTableViewController: UITableViewController {
         }
     }
     
-
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch currentMode {
@@ -107,7 +105,7 @@ class MovieDetailTableViewController: UITableViewController {
 
 
 // MARK: - Search Bar Related
-//(Console Log)
+//(Sample Console Log)
 //h 2021-08-07 07:28:19 +0000
 //receive subscription: (RemoveDuplicates)
 //request unlimited                //new subscription created
@@ -195,21 +193,14 @@ extension MovieDetailTableViewController {
                     
                 case .failure(let err):
                     switch err {
-                    case .invalidURL(let err) :
+                    case .invalidURL(let err), .nilData(let err) :
                         self?.changeDisplayModeTo(.somethingWrong(err))
                         
-                    case .thrownError(let err) :
+                    case .thrownError(let err), .unableToDecodeData(let err) :
                         self?.changeDisplayModeTo(.somethingWrong(err.localizedDescription))
                         
-                    //API returns nil data when no search result, can prints err to console for debugging
-                    case .nilData(_):
-                        self?.changeDisplayModeTo(.noMatchingResults)
-                        
-                    case .unableToConertToImage:
-                        self?.changeDisplayModeTo(.noMatchingResults)
-                        
-                    case .unableToDecodeData(_) :
-                        self?.changeDisplayModeTo(.noMatchingResults)
+                    case .unableToConvertToImage:
+                        self?.changeDisplayModeTo(.somethingWrong("invalid data received"))
                         
                     }
                     

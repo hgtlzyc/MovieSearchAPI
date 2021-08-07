@@ -41,6 +41,7 @@ class MovieDetailTableViewCell: UITableViewCell {
                 self?.currentTask = task
                 
             case .failure(let error):
+                //TODO: better error handle for the images
                 print(error)
             }
             
@@ -50,11 +51,6 @@ class MovieDetailTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        movieImageView.image = nil
-        movieNameLabel.text = nil
-        movieRatingLabel.text = nil
-        movieSummary.text = nil
         
         guard let task = currentTask else { return }
         task.cancel()

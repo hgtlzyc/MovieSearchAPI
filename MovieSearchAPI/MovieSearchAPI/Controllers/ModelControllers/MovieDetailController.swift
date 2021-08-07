@@ -12,7 +12,7 @@ enum MovieDetailError: LocalizedError {
     case thrownError(Error)
     case nilData(String)
     case unableToDecodeData(Error)
-    case unableToConertToImage
+    case unableToConvertToImage
 }
 
 
@@ -100,7 +100,7 @@ struct MovieDetailController {
             ) }
             
             guard let image = UIImage(data: data) else {
-                return completion(.failure(.unableToConertToImage),task)
+                return completion(.failure(.unableToConvertToImage),task)
             }
             
             cache.setObject(image, forKey: imageURLString as NSString)
