@@ -69,29 +69,42 @@ struct MovieDetailController {
     
     
     //https://image.tmdb.org/t/p/w500
-    static func fetchImageFor(_ imageURLString: String, completion: @escaping (Result<UIImage, MovieDetailError>) -> Void) {
+    static func fetchImageFor(_ imageURLString: String, completion: @escaping (Result<UIImage, MovieDetailError>, URLSessionDataTask?) -> Void) {
+        var task: URLSessionDataTask?
+        
         let imageBaseURL = URL(string: "https://image.tmdb.org/t/p/w500")
         
-        guard let imageBaseURL = imageBaseURL else { return completion(.failure(.invalidURL(imageBaseURL?.absoluteString ?? "nil image base url"))) }
+        guard let imageBaseURL = imageBaseURL else { return completion(
+            .failure(.invalidURL(imageBaseURL?.absoluteString ?? "nil image base url")),
+            task
+        ) }
         
         let finishedURL = imageBaseURL.appendingPathComponent(imageURLString)
         
         
-        URLSession.shared.dataTask(with: finishedURL) { data, response, error in
+        task = URLSession.shared.dataTask(with: finishedURL) { data, response, error in
             
             if let error = error {
-                return completion(.failure(.thrownError(error)))
+                return completion(
+                    .failure(.thrownError(error)),
+                    task
+                )
             }
             
-            guard let data = data else { return completion(.failure(.nilData("nil image data"))) }
+            guard let data = data else { return completion(
+                .failure(.nilData("nil image data")),
+                task
+            ) }
             
-            guard let image = UIImage(data: data) else { return completion(.failure(.unableToConertToImage)) }
+            guard let image = UIImage(data: data) else {
+                return completion(.failure(.unableToConertToImage),task)
+            }
             
-            completion(.success(image))
+            completion(.success(image), task)
             
-        }.resume()
+        }
         
-        
+        task?.resume()
     }//End Of func
     
     
