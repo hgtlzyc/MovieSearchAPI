@@ -1,5 +1,6 @@
 # Live Search From API Using Combine
-[Go To My Resume](https://github.com/hgtlzyc/Resume/blob/main/README.md)
+[Go To My Resume](https://github.com/hgtlzyc/Resume#live-search-from-api-using-combine-github-repo)
+<br />
 <br />
 ![](https://github.com/hgtlzyc/MovieSearchAPI/blob/1df048ba7fe97726bf9abc648904cf077a0e4d2b/LiveMovieSearchScreenRecording.gif)
  - API
